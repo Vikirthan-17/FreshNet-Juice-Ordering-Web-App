@@ -1,12 +1,13 @@
-const API_URL = "http://localhost:5000/api/juices";
-
 console.log("menu.js loaded");
 
-const cartCountText = document.getElementById("cartCount");
-const filterButtons = document.querySelectorAll(".filter-btn");
-const menuProductsBox = document.getElementById("menuProducts");
+const API_URL =
+  "https://freshnet-juice-ordering-web-app-production.up.railway.app/api/juices";
 
-let allJuices = [];
+const menuProducts = document.getElementById("menuProducts");
+const filterButtons = document.querySelectorAll(".filter-btn");
+const cartCount = document.getElementById("cartCount");
+
+let allProducts = [];
 
 function getCart() {
   return JSON.parse(localStorage.getItem("freshnestCart")) || [];
@@ -19,24 +20,29 @@ function saveCart(cart) {
 function updateCartCount() {
   const cart = getCart();
 
-  if (cartCountText) {
-    cartCountText.textContent = cart.reduce((sum, item) => {
-      return sum + item.quantity;
-    }, 0);
+  const totalQuantity = cart.reduce((sum, item) => {
+    return sum + Number(item.quantity);
+  }, 0);
+
+  if (cartCount) {
+    cartCount.textContent = totalQuantity;
   }
 }
 
-function addToCart(name, price) {
-  let cart = getCart();
+function addToCart(product) {
+  const cart = getCart();
 
-  const existingItem = cart.find((item) => item.name === name);
+  const existingProduct = cart.find((item) => item.name === product.name);
 
-  if (existingItem) {
-    existingItem.quantity += 1;
+  if (existingProduct) {
+    existingProduct.quantity += 1;
   } else {
     cart.push({
-      name: name,
-      price: price,
+      name: product.name,
+      price: Number(product.price),
+      category: product.category,
+      description: product.description,
+      image: product.image,
       quantity: 1,
     });
   }
@@ -44,43 +50,31 @@ function addToCart(name, price) {
   saveCart(cart);
   updateCartCount();
 
-  alert(`${name} added to cart!`);
+  alert(`${product.name} added to cart!`);
 }
 
 function renderProducts(products) {
-  console.log("Rendering products:", products);
-
-  if (!menuProductsBox) {
-    console.error("menuProducts div not found in menu.html");
-    return;
-  }
-
   if (!products || products.length === 0) {
-    menuProductsBox.innerHTML = `
-      <p class="empty-cart">No products available yet. Add products from admin page.</p>
+    menuProducts.innerHTML = `
+      <p class="empty-cart">No products available.</p>
     `;
     return;
   }
 
-  menuProductsBox.innerHTML = products
-    .map((juice) => {
-      const imagePath = juice.image || "images/juice-bottles.png";
-
+  menuProducts.innerHTML = products
+    .map((product) => {
       return `
-        <div class="product-card menu-product" data-category="${juice.category}">
+        <div class="product-card">
           <div class="product-img">
-            <img src="${imagePath}" alt="${juice.name}">
+            <img src="${product.image}" alt="${product.name}">
           </div>
 
-          <h3>${juice.name}</h3>
-          <p>${juice.description}</p>
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
 
           <div class="product-bottom">
-            <span>Rs. ${juice.price}</span>
-            <button 
-              class="add-btn" 
-              onclick="addToCart('${juice.name}', ${juice.price})"
-            >
+            <span>Rs. ${product.price}</span>
+            <button class="add-btn" data-id="${product._id}">
               Add
             </button>
           </div>
@@ -88,27 +82,44 @@ function renderProducts(products) {
       `;
     })
     .join("");
+
+  const addButtons = document.querySelectorAll(".add-btn");
+
+  addButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const productId = button.dataset.id;
+      const selectedProduct = allProducts.find(
+        (product) => product._id === productId
+      );
+
+      if (selectedProduct) {
+        addToCart(selectedProduct);
+      }
+    });
+  });
 }
 
-async function fetchJuices() {
+async function fetchProducts() {
   try {
     console.log("Fetching juices from backend...");
 
     const response = await fetch(API_URL);
-    const juices = await response.json();
 
-    console.log("Fetched juices:", juices);
-
-    allJuices = juices.filter((juice) => juice.isAvailable !== false);
-    renderProducts(allJuices);
-  } catch (error) {
-    if (menuProductsBox) {
-      menuProductsBox.innerHTML = `
-        <p class="empty-cart">Failed to load products. Check backend server.</p>
-      `;
+    if (!response.ok) {
+      throw new Error("Failed to fetch products");
     }
 
+    const products = await response.json();
+
+    allProducts = products.filter((product) => product.isAvailable);
+
+    renderProducts(allProducts);
+  } catch (error) {
     console.error("Fetch error:", error);
+
+    menuProducts.innerHTML = `
+      <p class="empty-cart">Failed to load products. Check backend server.</p>
+    `;
   }
 }
 
@@ -117,20 +128,20 @@ filterButtons.forEach((button) => {
     filterButtons.forEach((btn) => btn.classList.remove("active"));
     button.classList.add("active");
 
-    const category = button.dataset.category;
+    const selectedCategory = button.dataset.category;
 
-    if (category === "all") {
-      renderProducts(allJuices);
+    if (selectedCategory === "all") {
+      renderProducts(allProducts);
       return;
     }
 
-    const filteredProducts = allJuices.filter((juice) => {
-      return juice.category === category;
+    const filteredProducts = allProducts.filter((product) => {
+      return product.category.toLowerCase() === selectedCategory.toLowerCase();
     });
 
     renderProducts(filteredProducts);
   });
 });
 
+fetchProducts();
 updateCartCount();
-fetchJuices();

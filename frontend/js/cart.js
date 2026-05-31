@@ -1,4 +1,4 @@
-const ORDER_API_URL = "http://localhost:5000/api/orders";
+const ORDER_API_URL = "https://freshnet-juice-ordering-web-app-production.up.railway.app/api/orders";
 
 // Real shop WhatsApp number.
 // Format: country code + number, no + sign.

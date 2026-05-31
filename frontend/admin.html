@@ -30,6 +30,7 @@
       <nav class="nav-links admin-nav-links">
         <a href="#products">Products</a>
         <a href="#orders">Orders</a>
+        <a href="#security">Security</a>
       </nav>
 
       <div class="nav-actions">
@@ -132,6 +133,44 @@
 
     </section>
 
+    <!-- SECURITY SECTION -->
+    <section class="admin-password-section" id="security">
+      <div class="admin-password-card">
+        <div>
+          <p class="security-label">Admin Security</p>
+          <h2>Change Admin Password</h2>
+          <span>
+            Update your admin password regularly to keep the dashboard secure.
+          </span>
+        </div>
+
+        <form id="changePasswordForm" class="change-password-form">
+          <input
+            type="password"
+            id="currentPassword"
+            placeholder="Current Password"
+            required
+          />
+
+          <input
+            type="password"
+            id="newPassword"
+            placeholder="New Password"
+            required
+          />
+
+          <input
+            type="password"
+            id="confirmNewPassword"
+            placeholder="Confirm New Password"
+            required
+          />
+
+          <button type="submit">Change Password</button>
+        </form>
+      </div>
+    </section>
+
     <!-- FOOTER -->
     <footer>
       <h3>FreshNest Admin</h3>
@@ -140,6 +179,6 @@
 
   </div>
 
-  <script src="js/admin.js?v=5"></script>
+  <script src="js/admin.js?v=21"></script>
 </body>
 </html>

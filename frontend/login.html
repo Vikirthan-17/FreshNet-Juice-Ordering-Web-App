@@ -15,34 +15,45 @@
     rel="stylesheet"
   >
 </head>
+
 <body class="customer-bg">
 
   <div class="login-page">
-
     <div class="login-card">
-      <div class="login-logo">🍃 FreshNest</div>
+
+      <div class="login-logo">
+        🍃 FreshNest
+      </div>
 
       <h1>Admin Login</h1>
-      <p>Login to manage products and customer orders.</p>
 
-      <form id="loginForm" class="login-form">
-        <input type="email" id="adminEmail" placeholder="Admin Email" required />
-        <input type="password" id="adminPassword" placeholder="Password" required />
+      <p>
+        Login to manage products, customer orders and store operations.
+      </p>
+
+      <form class="login-form" id="loginForm">
+        <input
+          type="email"
+          id="adminEmail"
+          placeholder="Admin Email"
+          required
+        />
+
+        <input
+          type="password"
+          id="adminPassword"
+          placeholder="Password"
+          required
+        />
 
         <button type="submit">Login</button>
       </form>
 
       <a href="index.html" class="back-home">← Back to Website</a>
 
-      <div class="login-hint">
-        <strong>Demo Login</strong><br>
-        Email: admin@freshnest.com<br>
-        Password: admin123
-      </div>
     </div>
-
   </div>
 
-  <script src="js/login.js"></script>
+  <script src="js/login.js?v=21"></script>
 </body>
 </html>

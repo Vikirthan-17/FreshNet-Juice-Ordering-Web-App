@@ -4,8 +4,12 @@ if (!adminToken) {
   window.location.href = "login.html";
 }
 
-const JUICE_API_URL = "http://localhost:5000/api/juices";
-const ORDER_API_URL = "http://localhost:5000/api/orders";
+const BASE_API_URL =
+  "https://freshnet-juice-ordering-web-app-production.up.railway.app";
+
+const JUICE_API_URL = `${BASE_API_URL}/api/juices`;
+const ORDER_API_URL = `${BASE_API_URL}/api/orders`;
+const CHANGE_PASSWORD_API_URL = `${BASE_API_URL}/api/auth/change-password`;
 
 const juiceForm = document.getElementById("juiceForm");
 const adminProductList = document.getElementById("adminProductList");
@@ -17,6 +21,8 @@ const formTitle = document.getElementById("formTitle");
 const editingJuiceId = document.getElementById("editingJuiceId");
 const submitJuiceBtn = document.getElementById("submitJuiceBtn");
 const cancelEditBtn = document.getElementById("cancelEditBtn");
+
+const changePasswordForm = document.getElementById("changePasswordForm");
 
 const authHeaders = {
   "Content-Type": "application/json",
@@ -34,9 +40,9 @@ if (logoutBtn) {
   logoutBtn.addEventListener("click", logoutAdmin);
 }
 
-// =====================
-// CUSTOMER CONTACT HELPERS
-// =====================
+/* =====================
+   CUSTOMER CONTACT HELPERS
+===================== */
 function formatPhoneForWhatsApp(phone) {
   let cleaned = String(phone).replace(/\D/g, "");
 
@@ -86,13 +92,18 @@ FreshNest
 
 function openCustomerWhatsApp(phone, message) {
   const whatsappNumber = formatPhoneForWhatsApp(phone);
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    message
+  )}`;
+
   window.open(whatsappUrl, "_blank");
 }
 
 function openCustomerSMS(phone, message) {
   const cleanedPhone = String(phone).replace(/\s/g, "");
-  const isAppleDevice = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
+  const isAppleDevice = /iPhone|iPad|iPod|Macintosh/i.test(
+    navigator.userAgent
+  );
 
   const smsUrl = isAppleDevice
     ? `sms:${cleanedPhone}&body=${encodeURIComponent(message)}`
@@ -101,9 +112,9 @@ function openCustomerSMS(phone, message) {
   window.location.href = smsUrl;
 }
 
-// =====================
-// PRODUCTS
-// =====================
+/* =====================
+   PRODUCTS
+===================== */
 async function fetchJuices() {
   try {
     const response = await fetch(JUICE_API_URL);
@@ -125,18 +136,24 @@ async function fetchJuices() {
 
               <div class="availability-line">
                 Status:
-                <strong class="${juice.isAvailable ? "available-text" : "unavailable-text"}">
+                <strong class="${
+                  juice.isAvailable ? "available-text" : "unavailable-text"
+                }">
                   ${juice.isAvailable ? "Available" : "Unavailable"}
                 </strong>
               </div>
             </div>
 
             <div class="admin-product-actions">
-              <button class="edit-btn" onclick='startEditProduct(${JSON.stringify(juice)})'>
+              <button class="edit-btn" onclick='startEditProduct(${JSON.stringify(
+                juice
+              )})'>
                 Edit
               </button>
 
-              <button class="availability-btn" onclick="toggleAvailability('${juice._id}', ${!juice.isAvailable})">
+              <button class="availability-btn" onclick="toggleAvailability('${
+                juice._id
+              }', ${!juice.isAvailable})">
                 ${juice.isAvailable ? "Mark Unavailable" : "Mark Available"}
               </button>
 
@@ -289,9 +306,9 @@ async function deleteJuice(id) {
   }
 }
 
-// =====================
-// ORDERS
-// =====================
+/* =====================
+   ORDERS
+===================== */
 async function fetchOrders() {
   try {
     const response = await fetch(ORDER_API_URL, {
@@ -338,9 +355,15 @@ async function fetchOrders() {
             </div>
 
             <div class="order-details">
-              <p><strong>Address:</strong> ${order.address || "Not provided"}</p>
-              <p><strong>Delivery Type:</strong> ${order.deliveryType || "Delivery"}</p>
-              <p><strong>Payment Method:</strong> ${order.paymentMethod || "Cash on Delivery"}</p>
+              <p><strong>Address:</strong> ${
+                order.address || "Not provided"
+              }</p>
+              <p><strong>Delivery Type:</strong> ${
+                order.deliveryType || "Delivery"
+              }</p>
+              <p><strong>Payment Method:</strong> ${
+                order.paymentMethod || "Cash on Delivery"
+              }</p>
               ${
                 order.paymentReference
                   ? `<p><strong>Payment Reference:</strong> ${order.paymentReference}</p>`
@@ -374,10 +397,18 @@ async function fetchOrders() {
               <h4>Total: Rs. ${order.totalAmount}</h4>
 
               <select onchange="updateOrderStatus('${order._id}', this.value)">
-                <option value="Pending" ${order.status === "Pending" ? "selected" : ""}>Pending</option>
-                <option value="Preparing" ${order.status === "Preparing" ? "selected" : ""}>Preparing</option>
-                <option value="Delivered" ${order.status === "Delivered" ? "selected" : ""}>Delivered</option>
-                <option value="Cancelled" ${order.status === "Cancelled" ? "selected" : ""}>Cancelled</option>
+                <option value="Pending" ${
+                  order.status === "Pending" ? "selected" : ""
+                }>Pending</option>
+                <option value="Preparing" ${
+                  order.status === "Preparing" ? "selected" : ""
+                }>Preparing</option>
+                <option value="Delivered" ${
+                  order.status === "Delivered" ? "selected" : ""
+                }>Delivered</option>
+                <option value="Cancelled" ${
+                  order.status === "Cancelled" ? "selected" : ""
+                }>Cancelled</option>
               </select>
             </div>
           </div>
@@ -418,9 +449,75 @@ async function updateOrderStatus(orderId, newStatus) {
   }
 }
 
-// =====================
-// CONTACT BUTTON EVENTS
-// =====================
+/* =====================
+   CHANGE PASSWORD
+===================== */
+if (changePasswordForm) {
+  changePasswordForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const currentPassword = document
+      .getElementById("currentPassword")
+      .value.trim();
+
+    const newPassword = document.getElementById("newPassword").value.trim();
+
+    const confirmNewPassword = document
+      .getElementById("confirmNewPassword")
+      .value.trim();
+
+    if (!currentPassword || !newPassword || !confirmNewPassword) {
+      alert("Please fill all password fields.");
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      alert("New password must be at least 6 characters.");
+      return;
+    }
+
+    if (newPassword !== confirmNewPassword) {
+      alert("New password and confirm password do not match.");
+      return;
+    }
+
+    try {
+      const response = await fetch(CHANGE_PASSWORD_API_URL, {
+        method: "PUT",
+        headers: authHeaders,
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 401) {
+        alert("Session expired. Please login again.");
+        logoutAdmin();
+        return;
+      }
+
+      if (!response.ok) {
+        alert(data.message || "Failed to change password.");
+        return;
+      }
+
+      alert("Password changed successfully. Please login again.");
+
+      changePasswordForm.reset();
+      logoutAdmin();
+    } catch (error) {
+      console.error("Change password error:", error);
+      alert("Backend connection failed.");
+    }
+  });
+}
+
+/* =====================
+   CONTACT BUTTON EVENTS
+===================== */
 adminOrdersList.addEventListener("click", (event) => {
   const target = event.target;
 
@@ -439,7 +536,9 @@ adminOrdersList.addEventListener("click", (event) => {
 
 refreshOrdersBtn.addEventListener("click", fetchOrders);
 
-// Initial load
+/* =====================
+   INITIAL LOAD
+===================== */
 resetProductForm();
 fetchJuices();
 fetchOrders();

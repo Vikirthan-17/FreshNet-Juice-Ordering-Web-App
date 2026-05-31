@@ -1,4 +1,4 @@
-const AUTH_API_URL = "http://localhost:5000/api/auth/login";
+const AUTH_API_URL = "https://freshnet-juice-ordering-web-app-production.up.railway.app/api/auth/login";
 
 const loginForm = document.getElementById("loginForm");
 

@@ -1289,6 +1289,77 @@ body.customer-bg .page {
   outline: none;
 }
 
+/* ADMIN CHANGE PASSWORD */
+.admin-password-section {
+  padding: 35px 70px 10px;
+  background: var(--cream);
+}
+
+.admin-password-card {
+  background: var(--white);
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 20px 45px rgba(84, 55, 18, 0.08);
+}
+
+.security-label {
+  color: var(--orange);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.admin-password-card h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.admin-password-card span {
+  display: block;
+  color: var(--text-light);
+  margin-bottom: 22px;
+  line-height: 1.6;
+}
+
+.change-password-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) auto;
+  gap: 14px;
+}
+
+.change-password-form input {
+  width: 100%;
+  border: 1px solid #ead9af;
+  background: #fffaf0;
+  padding: 15px 18px;
+  border-radius: 18px;
+  outline: none;
+  font-family: inherit;
+  color: var(--brown);
+}
+
+.change-password-form input:focus {
+  border-color: var(--orange);
+}
+
+.change-password-form button {
+  border: none;
+  background: var(--orange);
+  color: white;
+  padding: 15px 22px;
+  border-radius: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.change-password-form button:hover {
+  transform: translateY(-3px);
+}
+
 /* LOGIN PAGE */
 .login-page {
   min-height: 100vh;
@@ -1609,6 +1680,18 @@ footer p {
   .order-bottom-row {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .admin-password-section {
+    padding: 24px;
+  }
+
+  .change-password-form {
+    grid-template-columns: 1fr;
+  }
+
+  .change-password-form button {
+    width: 100%;
   }
 
   .login-card {

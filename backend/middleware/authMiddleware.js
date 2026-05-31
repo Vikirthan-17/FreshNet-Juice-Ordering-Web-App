@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
 
-function protectAdmin(req, res, next) {
+function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({
-      message: "Not authorized. No token provided.",
+      message: "No token provided",
     });
   }
 
@@ -13,13 +13,18 @@ function protectAdmin(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.admin = decoded;
+
+    req.admin = {
+      id: decoded.id,
+      email: decoded.email,
+    };
+
     next();
   } catch (error) {
     return res.status(401).json({
-      message: "Not authorized. Invalid token.",
+      message: "Invalid or expired token",
     });
   }
 }
 
-module.exports = protectAdmin;
+module.exports = authMiddleware;
