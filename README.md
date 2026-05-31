@@ -54,6 +54,12 @@ FreshNest is a fully functional fresh juice ordering web application built for s
 ### Database
 - MongoDB Atlas
 
+## Live Demo
+
+Frontend: https://freshnest-juice-ordering-web-app.netlify.app
+
+Backend API: https://freshnet-juice-ordering-web-app-production.up.railway.app
+
 ## Screenshots
 
 ### Home Page
