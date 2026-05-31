@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>FreshNest</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" 
+    rel="stylesheet"
+  >
+</head>
+
+<body class="customer-bg">
+
+  <div class="page">
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="logo">
+        <span>🍃</span>
+        FreshNest
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="cart.html">Cart</a>
+        <a href="cart.html#checkout">Order</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="search-btn">🔍</button>
+        <a href="menu.html" class="contact-btn">Order Now</a>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <p class="small-title">Fresh fruits • Natural taste</p>
+
+        <h1>
+          Fresh Fruits,<br>
+          Fresh Juice,<br>
+          Fresh Mood.
+        </h1>
+
+        <p class="hero-text">
+          Enjoy colourful juices, smoothies and fruit bowls made fresh every day with
+          natural fruits and premium ingredients.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="menu.html" class="primary-btn">Shop Now</a>
+          <a href="#offers" class="secondary-btn">View Offers</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="fruit-bowl">
+          <img src="images/hero-fruits.png" alt="Fresh fruits bowl" class="hero-fruit-img" />
+        </div>
+
+        <span class="floating-fruit fruit-one">🍓</span>
+        <span class="floating-fruit fruit-two">🫐</span>
+        <span class="floating-fruit fruit-three">🍊</span>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="benefits">
+      <div class="benefit-card">
+        <h3>Fresh Ingredients</h3>
+        <p>Prepared with colourful fruits and natural flavours.</p>
+      </div>
+
+      <div class="benefit-card">
+        <h3>Fast Ordering</h3>
+        <p>Add your favourites to cart and place an order quickly.</p>
+      </div>
+
+      <div class="benefit-card">
+        <h3>Healthy Choices</h3>
+        <p>Juices, smoothies, shakes and bowls for every mood.</p>
+      </div>
+    </section>
+
+    <!-- FRESH PICKS -->
+    <section class="menu-section">
+      <div class="section-heading">
+        <p>Popular Menu</p>
+        <h2>Our Fresh Picks</h2>
+      </div>
+
+      <div class="product-grid">
+
+        <!-- BERRY BOWL -->
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/berry-bowl.png" alt="Berry Mix Bowl" />
+          </div>
+
+          <h3>Berry Mix Bowl</h3>
+          <p>Strawberry, blueberry, raspberry and fresh mint.</p>
+
+          <div class="product-bottom">
+            <span>Rs. 850</span>
+            <button 
+              class="add-btn"
+              onclick="addHomeProductToCart('Berry Mix Bowl', 850, 'bowl', 'Strawberry, blueberry, raspberry and fresh mint.', 'images/berry-bowl.png')">
+              Add
+            </button>
+          </div>
+        </div>
+
+        <!-- MANGO SMOOTHIE -->
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/mango-smoothie.png" alt="Mango Smoothie" />
+          </div>
+
+          <h3>Mango Smoothie</h3>
+          <p>Sweet mango smoothie with orange and mint.</p>
+
+          <div class="product-bottom">
+            <span>Rs. 750</span>
+            <button 
+              class="add-btn"
+              onclick="addHomeProductToCart('Mango Smoothie', 750, 'smoothie', 'Sweet mango smoothie with orange and mint.', 'images/mango-smoothie.png')">
+              Add
+            </button>
+          </div>
+        </div>
+
+        <!-- ORANGE JUICE -->
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/orange-juice.png" alt="Orange Juice" />
+          </div>
+
+          <h3>Orange Juice</h3>
+          <p>Orange, lemon and natural citrus freshness.</p>
+
+          <div class="product-bottom">
+            <span>Rs. 600</span>
+            <button 
+              class="add-btn"
+              onclick="addHomeProductToCart('Orange Juice', 600, 'juice', 'Orange, lemon and natural citrus freshness.', 'images/orange-juice.png')">
+              Add
+            </button>
+          </div>
+        </div>
+
+        <!-- ALMOND SHAKE -->
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/almond-shake.png" alt="Almond Shake" />
+          </div>
+
+          <h3>Almond Shake</h3>
+          <p>Almond milk, dates, honey and creamy texture.</p>
+
+          <div class="product-bottom">
+            <span>Rs. 800</span>
+            <button 
+              class="add-btn"
+              onclick="addHomeProductToCart('Almond Shake', 800, 'shake', 'Almond milk, dates, honey and creamy texture.', 'images/almond-shake.png')">
+              Add
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- OFFER SECTION -->
+    <section class="offer-section" id="offers">
+      <div class="offer-card">
+        <div class="offer-text">
+          <p>Special Offer</p>
+          <h2>Fresh combo for your day</h2>
+          <span>
+            Pick your favourite juice with a fruit bowl and enjoy a colourful healthy combo.
+          </span>
+          <a href="menu.html">Explore Menu</a>
+        </div>
+
+        <div class="bottle-box">
+          <img src="images/juice-bottles.png" alt="Fresh juice bottles" class="bottle-img" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDER SECTION -->
+    <section class="order-section">
+      <div class="order-left">
+        <p>Easy Order</p>
+        <h2>Ready to refresh?</h2>
+        <span>
+          Browse the menu, add your favourite drinks to cart and place your order easily.
+        </span>
+      </div>
+
+      <form class="order-form">
+        <input type="text" placeholder="Your Name" />
+        <input type="tel" placeholder="Phone Number" />
+        <select>
+          <option>Select your favourite category</option>
+          <option>Juice</option>
+          <option>Smoothie</option>
+          <option>Bowl</option>
+          <option>Shake</option>
+        </select>
+        <button type="button" onclick="window.location.href='menu.html'">
+          Go to Menu
+        </button>
+      </form>
+    </section>
+
+    <!-- FLOATING CART -->
+    <a href="cart.html" class="cart-float">
+      🛒 <span id="cartCount">0</span>
+    </a>
+
+    <!-- FOOTER -->
+    <footer>
+      <h3>FreshNest</h3>
+      <p>Fresh juice for a fresh day.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    function getFreshNestCart() {
+      return JSON.parse(localStorage.getItem("freshnestCart")) || [];
+    }
+
+    function saveFreshNestCart(cart) {
+      localStorage.setItem("freshnestCart", JSON.stringify(cart));
+    }
+
+    function updateHomeCartCount() {
+      const cart = getFreshNestCart();
+
+      const totalQuantity = cart.reduce((sum, item) => {
+        return sum + Number(item.quantity);
+      }, 0);
+
+      const cartCount = document.getElementById("cartCount");
+
+      if (cartCount) {
+        cartCount.textContent = totalQuantity;
+      }
+    }
+
+    function addHomeProductToCart(name, price, category, description, image) {
+      const cart = getFreshNestCart();
+
+      const existingProduct = cart.find((item) => item.name === name);
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        cart.push({
+          name: name,
+          price: Number(price),
+          category: category,
+          description: description,
+          image: image,
+          quantity: 1,
+        });
+      }
+
+      saveFreshNestCart(cart);
+      updateHomeCartCount();
+
+      alert(`${name} added to cart!`);
+    }
+
+    updateHomeCartCount();
+  </script>
+
+</body>
+</html>

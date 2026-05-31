@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>FreshNest Admin Panel</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" 
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- ADMIN NAVBAR -->
+    <header class="navbar admin-navbar">
+      <div class="logo">
+        <span>🍃</span>
+        FreshNest Admin
+      </div>
+
+      <nav class="nav-links admin-nav-links">
+        <a href="#products">Products</a>
+        <a href="#orders">Orders</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html" target="_blank" class="contact-btn">View Website</a>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </div>
+    </header>
+
+    <!-- ADMIN HERO -->
+    <section class="cart-page-hero">
+      <p>Admin Panel</p>
+      <h1>Manage FreshNest</h1>
+      <span>
+        Add products, manage availability, view orders and contact customers.
+      </span>
+    </section>
+
+    <!-- PRODUCT MANAGEMENT SECTION -->
+    <section class="admin-section" id="products">
+
+      <!-- ADD / EDIT PRODUCT FORM -->
+      <form class="admin-form" id="juiceForm">
+        <h2 id="formTitle">Add New Juice</h2>
+
+        <input type="hidden" id="editingJuiceId" />
+
+        <input 
+          type="text" 
+          id="juiceName" 
+          placeholder="Juice Name" 
+          required 
+        />
+
+        <select id="juiceCategory" required>
+          <option value="">Select Category</option>
+          <option value="juice">Juice</option>
+          <option value="smoothie">Smoothie</option>
+          <option value="bowl">Bowl</option>
+          <option value="shake">Shake</option>
+        </select>
+
+        <input 
+          type="number" 
+          id="juicePrice" 
+          placeholder="Price" 
+          required 
+        />
+
+        <textarea 
+          id="juiceDescription" 
+          placeholder="Description" 
+          required
+        ></textarea>
+
+        <input 
+          type="text" 
+          id="juiceImage" 
+          placeholder="Image path e.g. images/mango-smoothie.png" 
+        />
+
+        <button type="submit" id="submitJuiceBtn">Add Juice</button>
+
+        <button 
+          type="button" 
+          id="cancelEditBtn" 
+          class="cancel-edit-btn"
+        >
+          Cancel Edit
+        </button>
+      </form>
+
+      <!-- SAVED PRODUCTS -->
+      <div class="admin-products">
+        <h2>Saved Products</h2>
+
+        <div id="adminProductList" class="admin-product-list">
+          <p class="empty-cart">Loading products...</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ORDERS SECTION -->
+    <section class="admin-orders-section" id="orders">
+
+      <div class="admin-orders-header">
+        <div>
+          <p>Customer Orders</p>
+          <h2>Recent Orders</h2>
+        </div>
+
+        <button id="refreshOrdersBtn" class="refresh-orders-btn">
+          Refresh Orders
+        </button>
+      </div>
+
+      <div id="adminOrdersList" class="admin-orders-list">
+        <p class="empty-cart">Loading orders...</p>
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <h3>FreshNest Admin</h3>
+      <p>Manage products and customer orders easily.</p>
+    </footer>
+
+  </div>
+
+  <script src="js/admin.js?v=5"></script>
+</body>
+</html>

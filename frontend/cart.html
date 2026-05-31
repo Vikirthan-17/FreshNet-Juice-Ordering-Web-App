@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>FreshNest Cart</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" 
+    rel="stylesheet"
+  >
+</head>
+
+<body class="customer-bg">
+
+  <div class="page">
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="logo">
+        <span>🍃</span>
+        FreshNest
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="cart.html">Cart</a>
+        <a href="#checkout">Order</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="menu.html" class="contact-btn">Add More</a>
+      </div>
+    </header>
+
+    <!-- CART HERO -->
+    <section class="cart-page-hero">
+      <p>Your Cart</p>
+      <h1>Selected Fresh Items</h1>
+      <span>Review your juices before placing the order.</span>
+    </section>
+
+    <!-- CART SECTION -->
+    <section class="cart-section">
+      <div class="cart-box">
+        <div id="cartItems" class="cart-items">
+          <p class="empty-cart">No items added yet.</p>
+        </div>
+
+        <div class="cart-summary">
+          <h3>Total: Rs. <span id="cartTotal">0</span></h3>
+
+          <div class="cart-actions">
+            <button id="clearCartBtn" class="clear-cart-btn">Clear Cart</button>
+            <a href="#checkout" class="checkout-btn">Continue to Order</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHECKOUT SECTION -->
+    <section class="checkout-section" id="checkout">
+      <div class="checkout-card">
+
+        <div class="checkout-left">
+          <p>Checkout</p>
+          <h2>Place Your Order</h2>
+          <span>
+            Enter your details and confirm your juice order. Your order will be saved to MongoDB.
+          </span>
+        </div>
+
+        <form class="checkout-form" id="checkoutForm">
+          <input type="text" id="customerName" placeholder="Your Name" required />
+
+          <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
+
+          <textarea id="address" placeholder="Delivery Address"></textarea>
+
+          <select id="deliveryType" required>
+            <option value="Delivery">Delivery</option>
+            <option value="Pickup">Pickup</option>
+          </select>
+
+          <select id="paymentMethod" required>
+            <option value="Cash on Delivery">Cash on Delivery</option>
+            <option value="Bank Transfer">Bank Transfer</option>
+          </select>
+
+          <!-- PROFESSIONAL BANK TRANSFER SECTION -->
+          <div class="payment-info-box" id="paymentInfoBox">
+            <h4>Bank Transfer Payment</h4>
+
+            <div class="bank-info-grid">
+              <p><strong>Bank:</strong> Commercial Bank</p>
+              <p><strong>Account Name:</strong> FreshNest Juice Bar</p>
+              <p><strong>Account Number:</strong> 1234567890</p>
+              <p><strong>Branch:</strong> Colombo</p>
+            </div>
+
+            <input 
+              type="text" 
+              id="paymentReference" 
+              placeholder="Payment reference / slip note (optional)" 
+            />
+
+            <small>
+              After placing the order, send your bank slip through WhatsApp for confirmation.
+            </small>
+          </div>
+
+          <div class="checkout-total-box">
+            Total Amount: Rs. <span id="checkoutTotal">0</span>
+          </div>
+
+          <button type="submit">Place Order</button>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <h3>FreshNest</h3>
+      <p>Fresh juice for a fresh day.</p>
+    </footer>
+
+  </div>
+
+  <script src="js/cart.js?v=12"></script>
+</body>
+</html>

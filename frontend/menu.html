@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>FreshNest Menu</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" 
+    rel="stylesheet"
+  >
+</head>
+<body class="customer-bg">
+
+  <div class="page">
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="logo">
+        <span>🍃</span>
+        FreshNest
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="cart.html">Cart</a>
+        <a href="index.html#order">Order</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="contact-btn">View Cart</a>
+      </div>
+    </header>
+
+    <!-- MENU HERO -->
+    <section class="menu-hero">
+      <p>FreshNest Menu</p>
+      <h1>Choose Your Fresh Favourite</h1>
+      <span>
+        Fresh juices, smoothies, shakes and fruit bowls made with colourful natural ingredients.
+      </span>
+    </section>
+
+    <!-- MENU PRODUCTS -->
+    <section class="menu-page-section">
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="juice">Juice</button>
+        <button class="filter-btn" data-category="smoothie">Smoothie</button>
+        <button class="filter-btn" data-category="bowl">Bowl</button>
+        <button class="filter-btn" data-category="shake">Shake</button>
+      </div>
+
+      <!-- IMPORTANT: product cards will come from MongoDB using menu.js -->
+      <div class="product-grid menu-products" id="menuProducts">
+        <p class="empty-cart">Loading products...</p>
+      </div>
+    </section>
+
+    <!-- CART FLOAT -->
+    <div class="cart-float">
+      🛒 <span id="cartCount">0</span>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <h3>FreshNest</h3>
+      <p>Fresh juice for a fresh day.</p>
+    </footer>
+
+  </div>
+
+  <script src="js/menu.js"></script>
+</body>
+</html>
